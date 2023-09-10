@@ -1,3 +1,3 @@
 [build]
   # custom build command that install bun and run build
-  command = "./scripts/build.sh"
+  command = "./build.sh"
