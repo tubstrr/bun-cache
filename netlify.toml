@@ -1,4 +1,5 @@
 [build]
+  functions = "netlify/functions"
   # custom build command that install bun and run build
   command = "./build.sh"
 [build.environment]
