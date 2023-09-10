@@ -79,7 +79,7 @@ const server = Bun.serve({
    },
   });
  },
- port: 3000,
+ port: 443,
 });
 
 console.log(`Listening on http://localhost:${server.port} ...`);
