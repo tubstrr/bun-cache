@@ -1,3 +1,6 @@
 [build]
   # custom build command that install bun and run build
   command = "./build.sh"
+[build.environment]
+   # disable NPM install
+   NPM_FLAGS = "--version"
