@@ -4,7 +4,7 @@
  "type": "module",
  "scripts": {
   "start": "bun --watch index.js",
-  "build": "bun build ./src/index.ts --outfile=bundle.js"
+  "build": "bun build ./index.js --outfile=bundle.js"
  },
  "devDependencies": {
   "@types/figlet": "^1.5.6",
