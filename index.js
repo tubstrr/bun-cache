@@ -1,6 +1,6 @@
 // Helpers
 import { parseCookies, makeHash, fetchHTML } from "./helpers";
-import { initDB, insertPages, getPage, updatePages } from "./db";
+import { initDB, insertPages, getPage, updatePages, deletePagesBySlug, deleteAllPages } from "./db";
 
 // Create
 initDB;
@@ -11,6 +11,17 @@ const server = Bun.serve({
   const cookies = parseCookies(frozenHeaders);
 
   const url = new URL(req.url);
+
+  const shouldRefresh = url.searchParams.has("refresh");
+  if (shouldRefresh) {
+   const mode = url.searchParams.get("refresh");
+   if (mode === "all") {
+    deleteAllPages();
+   } else if (mode === "slug") {
+    const slug = url.pathname + url.hash + url.search;
+    deletePagesBySlug([slug]);
+   }
+  }
   const hash = makeHash(url + JSON.stringify(cookies));
 
   const cachedPage = getPage(hash);
@@ -32,13 +43,14 @@ const server = Bun.serve({
      $hash: hash,
      $html: html,
      $date: Date.now(),
+     $slug: url.pathname + url.hash + url.search,
     },
    ];
    insertPages(pages);
   } else {
    // If we have a cached page, check if it's expired
    const now = Date.now();
-   const oneDay = 10000;
+   const oneDay = 1000 * 60 * 60 * 24;
    const pageAge = now - cachedPage.date;
    if (pageAge > oneDay) {
     console.log("expired");
