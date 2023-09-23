@@ -1,4 +1,4 @@
 {
-	"installCommand": "bun install",
-	"buildCommand": "bun run bundle.js"
+	"installCommand": "curl -fsSL https://bun.sh/install | bash && ~/.bun/bin/bun install",
+	"buildCommand": "~/.bun/bin/bun run bundle.js"
 }
