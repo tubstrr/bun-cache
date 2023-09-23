@@ -1,3 +1,4 @@
 {
- "rewrites": [{ "source": "/:path*", "destination": "api/test/:path*" }]
+	"installCommand": "curl -fsSL https://bun.sh/install | bash && ~/.bun/bin/bun install",
+	"devCommand": "~/.bun/bin/bun run index.js"
 }
